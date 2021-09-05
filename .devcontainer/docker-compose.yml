@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    working_dir: /workspaces/functions-framework-go
+    command: sleep infinity
+    ports:
+      - 8080:8080
+    volumes:
+      - ..:/workspaces/functions-framework-go:cached
+    env_file: ./.env
+    tty: true
+    environment:
+      - LANG=C.UTF-8
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
